@@ -1,0 +1,60 @@
+package com.github.ZeronDev.gui
+
+import com.github.ZeronDev.LibraryPlugin
+import com.github.ZeronDev.LibraryPlugin.register
+import net.kyori.adventure.text.Component.text
+import org.bukkit.Bukkit
+import org.bukkit.Material
+import org.bukkit.event.inventory.InventoryClickEvent
+import org.bukkit.event.inventory.InventoryCloseEvent
+import org.bukkit.event.inventory.InventoryOpenEvent
+import org.bukkit.inventory.Inventory
+import org.bukkit.inventory.InventoryHolder
+import org.bukkit.inventory.ItemStack
+
+class InvHandler(title: String, lines: Int) : InventoryHolder {
+    internal lateinit var onclick: (InventoryClickEvent) -> Unit
+    internal lateinit var onclose: (InventoryCloseEvent) -> Unit
+    internal lateinit var onopen: (InventoryOpenEvent) -> Unit
+    private lateinit var spaceSetter: ItemStack
+    internal lateinit var slotList: List<Int>
+    internal val slotMap = mutableMapOf<Int, (SlotFunc).()->Unit>()
+    private val inv = Bukkit.createInventory(this, lines*9, text(title))
+
+    init {
+        register()
+        LibraryPlugin.plugin!!.server.pluginManager.registerEvents(GuiListener, LibraryPlugin.plugin!!)
+    }
+
+    fun slot(slot: Int, func: (SlotFunc).()->Unit) {
+        slotMap[slot] = func
+        item(slot, SlotFunc().apply(func).item ?: ItemStack(Material.AIR))
+    }
+
+    fun item(slot: Int): ItemStack? = inv.getItem(slot)
+    fun item(slot: Int, item: ItemStack) = inv.setItem(slot, item)
+
+    fun onOpen(func: (InventoryOpenEvent) -> Unit) {
+        this.onopen = func
+    }
+    fun onClose(func: (InventoryCloseEvent) -> Unit) {
+        this.onclose = func
+    }
+    fun onClick(func: (InventoryClickEvent) -> Unit) {
+        this.onclick = func
+    }
+    fun space(slotList: List<Int>, item: ItemStack) {
+        this.spaceSetter = item
+        this.slotList = slotList
+    }
+    fun build() : Inventory {
+        if (::spaceSetter.isInitialized) {
+            slotList.forEach { index ->
+                inv.setItem(index, spaceSetter)
+            }
+        }
+        return inv
+    }
+
+    override fun getInventory(): Inventory = inv
+}
