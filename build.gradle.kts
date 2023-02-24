@@ -1,5 +1,6 @@
 plugins {
     kotlin("jvm") version "1.8.0"
+    id("org.jetbrains.dokka") version "1.5.0"
     `maven-publish`
 }
 
@@ -67,18 +68,26 @@ tasks {
 publishing {
     publications {
         create<MavenPublication>(project.name) {
-            groupId = "io.github.ZeronDev"
-            artifactId = "ZeronLib"
-            version = project.version.toString()
             from(components["java"])
+            artifact(tasks["sourcesJar"])
+            artifact(tasks["javadocJar"])
 
             pom {
                 name.set("ZeronLib")
                 description.set("Minecraft library for Zeron")
                 url.set("https://github.com/ZeronDev/ZeronLib")
+                licenses {
+                    license {
+                        name.set("GNU General Public License Version 3")
+                        url.set("https://www.gnu.org/licenses/gpl-3.0.txt")
+                    }
+                }
                 developers {
-                    name.set("Zeron")
-                    description.set("Minecraft Plugin Developer")
+                    developer {
+                        name.set("Zeron")
+                        description.set("Minecraft Plugin Developer")
+                        email.set("zeron_0304@naver.com")
+                    }
                 }
                 scm {
                     connection.set("scm:git:https://github.com/ZeronDev/ZeronLib.git")
@@ -91,8 +100,7 @@ publishing {
     repositories {
         maven {
 //            credentials {
-////                username = "userID"
-////                password = "password"
+//
 //            }
             url = uri("https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/")
         }
