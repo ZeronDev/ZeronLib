@@ -1,7 +1,7 @@
-package com.github.ZeronDev.listener
+package io.github.ZeronDev.listener
 
-import com.github.ZeronDev.LibraryPlugin.plugin
-import com.github.ZeronDev.LibraryPlugin.register
+import io.github.ZeronDev.LibraryPlugin.plugin
+import io.github.ZeronDev.LibraryPlugin.register
 import org.bukkit.Bukkit
 import org.bukkit.event.Event
 import org.bukkit.event.EventHandler

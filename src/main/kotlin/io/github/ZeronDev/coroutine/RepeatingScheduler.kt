@@ -1,7 +1,7 @@
-package com.github.ZeronDev.coroutine
+package io.github.ZeronDev.coroutine
 
-import com.github.ZeronDev.LibraryPlugin.plugin
-import com.github.ZeronDev.LibraryPlugin.register
+import io.github.ZeronDev.LibraryPlugin.plugin
+import io.github.ZeronDev.LibraryPlugin.register
 import org.bukkit.Bukkit
 import org.bukkit.scheduler.BukkitTask
 

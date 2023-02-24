@@ -1,6 +1,6 @@
-package com.github.ZeronDev
+package io.github.ZeronDev
 
-import com.github.ZeronDev.LibraryPlugin.register
+import io.github.ZeronDev.LibraryPlugin.register
 import net.kyori.adventure.text.Component.text
 import org.bukkit.Bukkit
 import org.bukkit.entity.Player

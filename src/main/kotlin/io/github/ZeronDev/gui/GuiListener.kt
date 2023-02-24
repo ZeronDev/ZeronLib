@@ -1,4 +1,4 @@
-package com.github.ZeronDev.gui
+package io.github.ZeronDev.gui
 
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener

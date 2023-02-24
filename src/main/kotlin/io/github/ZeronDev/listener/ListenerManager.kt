@@ -1,4 +1,4 @@
-package com.github.ZeronDev.listener
+package io.github.ZeronDev.listener
 
 import org.bukkit.Bukkit
 import org.bukkit.event.Event

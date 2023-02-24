@@ -1,4 +1,4 @@
-package com.github.ZeronDev
+package io.github.ZeronDev
 
 import org.bukkit.plugin.Plugin
 import org.bukkit.plugin.java.PluginClassLoader

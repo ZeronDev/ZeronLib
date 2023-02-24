@@ -1,4 +1,4 @@
-package com.github.ZeronDev.gui
+package io.github.ZeronDev.gui
 
 import org.bukkit.entity.Player
 import org.bukkit.inventory.Inventory

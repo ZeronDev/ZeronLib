@@ -1,4 +1,4 @@
-package com.github.ZeronDev.config
+package io.github.ZeronDev.config
 
 import com.google.gson.Gson
 import org.bukkit.configuration.file.YamlConfiguration

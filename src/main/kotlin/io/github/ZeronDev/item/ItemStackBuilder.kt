@@ -1,7 +1,7 @@
-package com.github.ZeronDev.item
+package io.github.ZeronDev.item
 
 import com.google.gson.Gson
-import com.github.ZeronDev.item.ItemListener.register
+import io.github.ZeronDev.item.ItemListener.register
 import net.kyori.adventure.text.Component.text
 import org.bukkit.Material
 import org.bukkit.NamespacedKey

@@ -1,8 +1,8 @@
-package com.github.ZeronDev.item
+package io.github.ZeronDev.item
 
 import com.google.gson.Gson
-import com.github.ZeronDev.LibraryPlugin
-import com.github.ZeronDev.LibraryPlugin.plugin
+import io.github.ZeronDev.LibraryPlugin
+import io.github.ZeronDev.LibraryPlugin.plugin
 import org.bukkit.NamespacedKey
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener

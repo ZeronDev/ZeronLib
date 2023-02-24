@@ -1,4 +1,4 @@
-package com.github.ZeronDev.gui
+package io.github.ZeronDev.gui
 
 import org.bukkit.event.inventory.InventoryClickEvent
 import org.bukkit.inventory.ItemStack

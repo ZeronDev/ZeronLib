@@ -1,7 +1,7 @@
-package com.github.ZeronDev.gui
+package io.github.ZeronDev.gui
 
-import com.github.ZeronDev.LibraryPlugin
-import com.github.ZeronDev.LibraryPlugin.register
+import io.github.ZeronDev.LibraryPlugin
+import io.github.ZeronDev.LibraryPlugin.register
 import net.kyori.adventure.text.Component.text
 import org.bukkit.Bukkit
 import org.bukkit.Material

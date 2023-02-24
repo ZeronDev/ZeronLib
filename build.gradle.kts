@@ -1,8 +1,9 @@
 plugins {
     kotlin("jvm") version "1.8.0"
+    `maven-publish`
 }
 
-group = "com.github.ZeronDev"
+group = "io.github.ZeronDev"
 version = "1.0.0"
 
 java.toolchain.languageVersion.set(JavaLanguageVersion.of(17))
@@ -24,17 +25,34 @@ dependencies {
 }
 
 tasks {
+    compileKotlin {
+        kotlinOptions.jvmTarget = "17"
+    }
+    javadoc {
+        options.encoding = "UTF-8"
+    }
     processResources {
         filesMatching("*.yml") {
             expand(project.properties)
         }
     }
+    create<Jar>("sourcesJar") {
+        archiveClassifier.set("sources")
+        from(sourceSets["main"].allSource)
+    }
+
+    create<Jar>("javadocJar") {
+        archiveClassifier.set("javadoc")
+        dependsOn("dokkaHtml")
+        from("$buildDir/dokka/html")
+    }
+
     create<Jar>("paperJar") {
         from(sourceSets["main"].output)
 
         archiveBaseName.set(rootProject.name)
         archiveClassifier.set("")
-        archiveVersion.set("")
+        archiveVersion.set(project.version.toString())
 
         doLast {
             copy {
@@ -45,3 +63,39 @@ tasks {
         }
     }
 }
+
+publishing {
+    publications {
+        create<MavenPublication>(project.name) {
+            groupId = "io.github.ZeronDev"
+            artifactId = "ZeronLib"
+            version = project.version.toString()
+            from(components["java"])
+
+            pom {
+                name.set("ZeronLib")
+                description.set("Minecraft library for Zeron")
+                url.set("https://github.com/ZeronDev/ZeronLib")
+                developers {
+                    name.set("Zeron")
+                    description.set("Minecraft Plugin Developer")
+                }
+                scm {
+                    connection.set("scm:git:https://github.com/ZeronDev/ZeronLib.git")
+                    developerConnection.set("scm:git:https://github.com/ZeronDev/ZeronLib.git")
+                    url.set("https://github.com/ZeronDev/ZeronLib.git")
+                }
+            }
+        }
+    }
+    repositories {
+        maven {
+//            credentials {
+////                username = "userID"
+////                password = "password"
+//            }
+            url = uri("https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/")
+        }
+    }
+}
+
