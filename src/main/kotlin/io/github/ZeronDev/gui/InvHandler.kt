@@ -1,7 +1,6 @@
 package io.github.ZeronDev.gui
 
 import io.github.ZeronDev.LibraryPlugin
-import io.github.ZeronDev.LibraryPlugin.register
 import net.kyori.adventure.text.Component.text
 import org.bukkit.Bukkit
 import org.bukkit.Material
@@ -22,7 +21,6 @@ class InvHandler(title: String, lines: Int) : InventoryHolder {
     private val inv = Bukkit.createInventory(this, lines*9, text(title))
 
     init {
-        register()
         LibraryPlugin.plugin!!.server.pluginManager.registerEvents(GuiListener, LibraryPlugin.plugin!!)
     }
 

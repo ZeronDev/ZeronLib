@@ -1,11 +1,22 @@
+import org.jetbrains.kotlin.konan.properties.loadProperties
+
 plugins {
     kotlin("jvm") version "1.8.0"
     id("org.jetbrains.dokka") version "1.5.0"
     `maven-publish`
+    signing
 }
 
+val properties = loadProperties(project.file("local.properties").path)
+
+val userID = properties["ossrhUsername"]
+val passWord = properties["ossrhPassword"]
+ext["signing.key"] = properties["signing.keyId"]
+ext["signing.password"] = properties["signing.password"]
+ext["signing.secretKeyRingFile"] = properties["signing.secretKeyRingFile"]
+
 group = "io.github.ZeronDev"
-version = "1.0.0"
+version = "1.0.1"
 
 java.toolchain.languageVersion.set(JavaLanguageVersion.of(17))
 
@@ -18,7 +29,7 @@ repositories {
 
 dependencies {
     implementation(kotlin("stdlib"))
-    compileOnly("io.papermc.paper:paper-api:1.18.1-R0.1-SNAPSHOT")
+    compileOnly("io.papermc.paper:paper-api:1.19.2-R0.1-SNAPSHOT")
     implementation("com.github.shynixn.mccoroutine:mccoroutine-bukkit-api:2.9.0")
     implementation("com.github.shynixn.mccoroutine:mccoroutine-bukkit-core:2.9.0")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4")
@@ -99,11 +110,18 @@ publishing {
     }
     repositories {
         maven {
-//            credentials {
-//
-//            }
+            credentials {
+                username = userID as String
+                password = passWord as String
+            }
             url = uri("https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/")
         }
     }
 }
 
+signing {
+    setRequired {
+        gradle.taskGraph.allTasks.any { it is PublishToMavenRepository }
+    }
+    sign(publishing.publications[rootProject.name])
+}

@@ -1,7 +1,6 @@
 package io.github.ZeronDev.listener
 
 import io.github.ZeronDev.LibraryPlugin.plugin
-import io.github.ZeronDev.LibraryPlugin.register
 import org.bukkit.Bukkit
 import org.bukkit.event.Event
 import org.bukkit.event.EventHandler
@@ -10,7 +9,6 @@ import org.bukkit.event.Listener
 
 object EventListener {
     inline fun <reified T : Event>listen(eventPriority: EventPriority = EventPriority.NORMAL, crossinline func: (ListenerManager<T>).() -> Unit) {
-        register()
         when (eventPriority) {
             EventPriority.LOWEST -> {
                 Bukkit.getPluginManager().registerEvents(object : Listener {

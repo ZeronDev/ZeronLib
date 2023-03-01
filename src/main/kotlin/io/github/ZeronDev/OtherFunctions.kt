@@ -1,6 +1,5 @@
 package io.github.ZeronDev
 
-import io.github.ZeronDev.LibraryPlugin.register
 import net.kyori.adventure.text.Component.text
 import org.bukkit.Bukkit
 import org.bukkit.entity.Player
@@ -9,9 +8,6 @@ import org.bukkit.scoreboard.DisplaySlot
 import org.bukkit.scoreboard.Scoreboard
 
 object OtherFunctions {
-    init {
-        register()
-    }
     fun registerPermission(permission: String) {
         if (Bukkit.getPluginManager().getPermission(permission) == null) {
             Bukkit.getPluginManager().addPermission(Permission(permission))
