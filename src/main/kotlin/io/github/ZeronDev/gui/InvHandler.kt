@@ -1,6 +1,8 @@
 package io.github.ZeronDev.gui
 
 import io.github.ZeronDev.LibraryPlugin
+import io.github.ZeronDev.LibraryPlugin.init
+import io.github.ZeronDev.LibraryPlugin.plugin
 import net.kyori.adventure.text.Component.text
 import org.bukkit.Bukkit
 import org.bukkit.Material
@@ -20,8 +22,16 @@ class InvHandler(title: String, lines: Int) : InventoryHolder {
     internal val slotMap = mutableMapOf<Int, (SlotFunc).()->Unit>()
     private val inv = Bukkit.createInventory(this, lines*9, text(title))
 
+    companion object {
+        var isRegistered = false
+    }
+
     init {
-        LibraryPlugin.plugin!!.server.pluginManager.registerEvents(GuiListener, LibraryPlugin.plugin!!)
+        plugin ?: init()
+        if (!isRegistered) {
+            plugin!!.server.pluginManager.registerEvents(GuiListener, plugin!!)
+            isRegistered = true
+        }
     }
 
     fun slot(slot: Int, func: (SlotFunc).()->Unit) {

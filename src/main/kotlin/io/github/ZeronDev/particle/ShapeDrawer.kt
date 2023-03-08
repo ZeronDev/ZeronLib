@@ -22,7 +22,7 @@ object ShapeDrawer {
             count += interval
         }
     }
-    fun drawCircle(particle: Particle, location: Location,radius: Double, interval: Double = 0.1, speed: Int = 0,isVertical: Boolean = false) {
+    fun drawCircle(particle: Particle, location: Location, radius: Double, interval: Double = 0.1, speed: Int = 0, isVertical: Boolean = false) {
         var angle = 0.toDouble()
 
         if (isVertical) {
@@ -35,10 +35,21 @@ object ShapeDrawer {
 
                     location.world.spawnParticle(particle, location, 1)
                     location.subtract(offset)
+
                     angle += interval
 
                     delay(speed.toLong())
                 }
+            }
+        } else {
+            while (angle <= PI * 2) {
+
+                val x = radius * sin(angle)
+                val z = radius * cos(angle)
+
+                location.world.spawnParticle(particle, Location(location.world, location.x+x, location.y, location.z+z), 1)
+
+                angle += interval
             }
         }
     }
