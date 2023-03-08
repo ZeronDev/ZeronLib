@@ -16,7 +16,7 @@ ext["signing.password"] = properties["signing.password"]
 ext["signing.secretKeyRingFile"] = properties["signing.secretKeyRingFile"]
 
 group = "io.github.ZeronDev"
-version = "1.1.0"
+version = "1.1.2"
 
 java.toolchain.languageVersion.set(JavaLanguageVersion.of(17))
 
