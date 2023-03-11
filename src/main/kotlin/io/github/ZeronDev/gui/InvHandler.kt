@@ -1,6 +1,5 @@
 package io.github.ZeronDev.gui
 
-import io.github.ZeronDev.LibraryPlugin
 import io.github.ZeronDev.LibraryPlugin.init
 import io.github.ZeronDev.LibraryPlugin.plugin
 import net.kyori.adventure.text.Component.text

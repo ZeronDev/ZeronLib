@@ -9,11 +9,16 @@ import org.bukkit.event.EventPriority
 import org.bukkit.event.Listener
 
 object EventListener {
-    inline fun <reified T : Event>listen(eventPriority: EventPriority = EventPriority.NORMAL, crossinline func: (ListenerManager<T>).() -> Unit) {
+    inline fun <reified T : Event> listen(
+        eventPriority: EventPriority = EventPriority.NORMAL,
+        crossinline func: (ListenerManager<T>).() -> Unit
+    ) {
+
         plugin ?: init()
+
         when (eventPriority) {
             EventPriority.LOWEST -> {
-                 Bukkit.getPluginManager().registerEvents(object : Listener {
+                Bukkit.getPluginManager().registerEvents(object : Listener {
                     @EventHandler(priority = EventPriority.LOWEST)
                     fun listen(e: T) {
                         func(ListenerManager(e))

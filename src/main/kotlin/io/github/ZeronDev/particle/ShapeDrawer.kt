@@ -13,6 +13,7 @@ import kotlin.math.sin
 
 object ShapeDrawer {
     fun drawLine(particle: Particle, loc1: Location, loc2: Location, interval: Double = 0.1) {
+        plugin ?: init()
         val direction = loc1.toVector().subtract(loc2.toVector())
 
         var count = 0.toDouble()
@@ -23,10 +24,10 @@ object ShapeDrawer {
         }
     }
     fun drawCircle(particle: Particle, location: Location, radius: Double, interval: Double = 0.1, speed: Int = 0, isVertical: Boolean = false) {
+        plugin ?: init()
         var angle = 0.toDouble()
 
         if (isVertical) {
-            plugin ?: init()
             plugin!!.launch {
                 while (angle <= PI * 2) {
                     val offset = location.direction.clone().multiply(cos(angle) * radius)

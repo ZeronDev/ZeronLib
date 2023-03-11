@@ -1,15 +1,18 @@
 package io.github.ZeronDev
 
-import org.bukkit.plugin.Plugin
+import org.bukkit.Bukkit
+import org.bukkit.plugin.java.JavaPlugin
 import org.bukkit.plugin.java.PluginClassLoader
 
 object LibraryPlugin {
-    var plugin: Plugin? = null
-    init {
-        init()
-    }
+    var plugin: JavaPlugin? = null
 
     fun init() {
-        plugin = (LibraryPlugin::class.java.classLoader as PluginClassLoader).plugin
+        plugin = Bukkit.getPluginManager().plugins.first {
+            PluginClassLoader::class.java
+                .getDeclaredField("libraryLoader")
+                .apply { isAccessible = true }[it.javaClass.classLoader] ==
+                    LibraryPlugin::class.java.classLoader
+        } as JavaPlugin
     }
 }
