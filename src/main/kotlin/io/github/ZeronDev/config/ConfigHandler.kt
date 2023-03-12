@@ -7,7 +7,7 @@ import java.io.File
 object ConfigHandler {
     fun newConfigFile(file: File) : YamlConfiguration? {
         try {
-            file.createNewFile()
+            if (!file.exists()) file.createNewFile()
             val config = YamlConfiguration.loadConfiguration(file)
             config.save(file)
             return config

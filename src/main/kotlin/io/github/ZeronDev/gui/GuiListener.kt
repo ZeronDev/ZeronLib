@@ -7,7 +7,6 @@ import org.bukkit.event.inventory.InventoryCloseEvent
 import org.bukkit.event.inventory.InventoryOpenEvent
 
 object GuiListener : Listener {
-
     @EventHandler
     fun onOpen(e: InventoryOpenEvent) {
         (e.inventory.holder as? InvHandler)?.let {

@@ -1,7 +1,7 @@
 import org.jetbrains.kotlin.konan.properties.loadProperties
 
 plugins {
-    kotlin("jvm") version "1.8.0"
+    kotlin("jvm") version "1.8.10"
     id("org.jetbrains.dokka") version "1.5.0"
     `maven-publish`
     signing
@@ -16,9 +16,11 @@ ext["signing.password"] = properties["signing.password"]
 ext["signing.secretKeyRingFile"] = properties["signing.secretKeyRingFile"]
 
 group = "io.github.ZeronDev"
-version = "1.1.4"
+version = "1.2.0"
 
-java.toolchain.languageVersion.set(JavaLanguageVersion.of(17))
+kotlin.jvmToolchain {
+    languageVersion.set(JavaLanguageVersion.of(17))
+}
 
 repositories {
     mavenCentral()
@@ -29,11 +31,16 @@ repositories {
 
 dependencies {
     implementation(kotlin("stdlib"))
+    compileOnly("io.papermc.paper:paper-api:1.19.3-R0.1-SNAPSHOT")
     compileOnly("io.papermc.paper:paper-api:1.19.2-R0.1-SNAPSHOT")
+    compileOnly("io.papermc.paper:paper-api:1.18.2-R0.1-SNAPSHOT")
+    compileOnly("io.papermc.paper:paper-api:1.18.1-R0.1-SNAPSHOT")
+    compileOnly("io.papermc.paper:paper-api:1.17.1-R0.1-SNAPSHOT")
+
     implementation("io.github.monun:kommand-api:2.14.0")
     implementation("com.github.shynixn.mccoroutine:mccoroutine-bukkit-api:2.9.0")
     implementation("com.github.shynixn.mccoroutine:mccoroutine-bukkit-core:2.9.0")
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.0-Beta")
     implementation(kotlin("reflect"))
 }
 

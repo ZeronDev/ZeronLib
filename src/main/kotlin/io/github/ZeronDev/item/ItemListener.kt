@@ -1,10 +1,8 @@
 package io.github.ZeronDev.item
 
 import com.google.gson.Gson
-import io.github.ZeronDev.LibraryPlugin
 import io.github.ZeronDev.LibraryPlugin.init
 import io.github.ZeronDev.LibraryPlugin.plugin
-import kotlinx.coroutines.CoroutineScope
 import org.bukkit.NamespacedKey
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
