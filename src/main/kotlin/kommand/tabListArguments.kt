@@ -6,5 +6,5 @@ import io.github.monun.kommand.StringType
 
 object tabListArguments {
     fun requiredArgument(vararg tabList: String) = dynamicByMap(tabList.toList().associateBy { it })
-    fun tabListArgument(vararg tabList: String, type: StringType) = string(type).apply { suggests { suggest(tabList.toList()) } }
+    fun tabListArgument(vararg tabList: String, type: StringType = StringType.SINGLE_WORD) = string(type).apply { suggests { suggest(tabList.toList()) } }
 }
