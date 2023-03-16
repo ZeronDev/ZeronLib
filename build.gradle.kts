@@ -16,7 +16,7 @@ ext["signing.password"] = properties["signing.password"]
 ext["signing.secretKeyRingFile"] = properties["signing.secretKeyRingFile"]
 
 group = "io.github.ZeronDev"
-version = "1.3.0"
+version = "1.4.0"
 
 kotlin.jvmToolchain {
     languageVersion.set(JavaLanguageVersion.of(17))
@@ -32,9 +32,9 @@ repositories {
 dependencies {
     implementation(kotlin("stdlib"))
     compileOnly("io.papermc.paper:paper-api:1.19.2-R0.1-SNAPSHOT")
-    implementation("io.github.monun:kommand-api:2.14.0")
-    implementation("com.github.shynixn.mccoroutine:mccoroutine-bukkit-api:2.9.0")
-    implementation("com.github.shynixn.mccoroutine:mccoroutine-bukkit-core:2.9.0")
+    implementation("io.github.monun:kommand-api:3.1.2")
+    implementation("com.github.shynixn.mccoroutine:mccoroutine-bukkit-api:2.11.0")
+    implementation("com.github.shynixn.mccoroutine:mccoroutine-bukkit-core:2.11.0")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.0-Beta")
     implementation(kotlin("reflect"))
 }
