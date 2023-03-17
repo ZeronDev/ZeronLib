@@ -1,6 +1,5 @@
 package io.github.ZeronDev.region
 
-import io.github.ZeronDev.LibraryPlugin.init
 import io.github.ZeronDev.LibraryPlugin.plugin
 import org.bukkit.Location
 import org.bukkit.event.EventHandler
@@ -29,15 +28,13 @@ class Region(val pointOne: Location, val pointTwo: Location, val containsAllY: B
     }
 
     fun onEnter(manager: (PlayerMoveEvent) -> Unit) {
-        plugin ?: init()
-
-        plugin?.server?.pluginManager?.registerEvents(object : Listener {
+        plugin.server.pluginManager.registerEvents(object : Listener {
             @EventHandler
             fun onEnter(e: PlayerMoveEvent) {
                 if (e.hasChangedPosition() && isEntered(e.player.location)) {
                     manager(e)
                 }
             }
-        }, plugin!!)
+        }, plugin)
     }
 }

@@ -1,6 +1,5 @@
 package io.github.ZeronDev.listener
 
-import io.github.ZeronDev.LibraryPlugin.init
 import io.github.ZeronDev.LibraryPlugin.plugin
 import org.bukkit.Bukkit
 import org.bukkit.event.Event
@@ -14,8 +13,6 @@ object EventListener {
         crossinline func: (ListenerManager<T>).() -> Unit
     ) {
 
-        plugin ?: init()
-
         when (eventPriority) {
             EventPriority.LOWEST -> {
                 Bukkit.getPluginManager().registerEvents(object : Listener {
@@ -23,7 +20,7 @@ object EventListener {
                     fun listen(e: T) {
                         func(ListenerManager(e))
                     }
-                }, plugin!!)
+                }, plugin)
             }
             EventPriority.LOW -> {
                 Bukkit.getPluginManager().registerEvents(object : Listener {
@@ -31,7 +28,7 @@ object EventListener {
                     fun listen(e: T) {
                         func(ListenerManager(e))
                     }
-                }, plugin!!)
+                }, plugin)
             }
             EventPriority.NORMAL -> {
                 Bukkit.getPluginManager().registerEvents(object : Listener {
@@ -39,7 +36,7 @@ object EventListener {
                     fun listen(e: T) {
                         func(ListenerManager(e))
                     }
-                }, plugin!!)
+                }, plugin)
             }
             EventPriority.HIGH -> {
                 Bukkit.getPluginManager().registerEvents(object : Listener {
@@ -47,7 +44,7 @@ object EventListener {
                     fun listen(e: T) {
                         func(ListenerManager(e))
                     }
-                }, plugin!!)
+                }, plugin)
             }
             EventPriority.HIGHEST -> {
                 Bukkit.getPluginManager().registerEvents(object : Listener {
@@ -55,7 +52,7 @@ object EventListener {
                     fun listen(e: T) {
                         func(ListenerManager(e))
                     }
-                }, plugin!!)
+                }, plugin)
             }
             else -> {
                 Bukkit.getPluginManager().registerEvents(object : Listener {
@@ -63,7 +60,7 @@ object EventListener {
                     fun listen(e: T) {
                         func(ListenerManager(e))
                     }
-                }, plugin!!)
+                }, plugin)
             }
         }
     }

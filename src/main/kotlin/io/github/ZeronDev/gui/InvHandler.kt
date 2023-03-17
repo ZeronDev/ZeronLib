@@ -1,6 +1,5 @@
 package io.github.ZeronDev.gui
 
-import io.github.ZeronDev.LibraryPlugin.init
 import io.github.ZeronDev.LibraryPlugin.plugin
 import net.kyori.adventure.text.Component.text
 import org.bukkit.Bukkit
@@ -26,9 +25,8 @@ class InvHandler(title: String, lines: Int) : InventoryHolder {
     }
 
     init {
-        plugin ?: init()
         if (!isRegistered) {
-            plugin!!.server.pluginManager.registerEvents(GuiListener, plugin!!)
+            plugin.server.pluginManager.registerEvents(GuiListener, plugin)
             isRegistered = true
         }
     }
