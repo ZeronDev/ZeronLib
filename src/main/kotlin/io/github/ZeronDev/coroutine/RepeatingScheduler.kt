@@ -10,7 +10,7 @@ class RepeatingScheduler {
         fun scheduleWith(period: Int, delay: Int = 0,func: ()->Unit) : RepeatingScheduler {
             val sch = RepeatingScheduler()
             sch.apply {
-                scheduler = Bukkit.getScheduler().runTaskTimerAsynchronously(plugin!!,
+                scheduler = Bukkit.getScheduler().runTaskTimerAsynchronously(plugin,
                 Runnable { func() }, delay.toLong(), period.toLong())
             }
             return sch

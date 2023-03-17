@@ -1,7 +1,6 @@
 package io.github.ZeronDev.item
 
 import com.google.gson.Gson
-import io.github.ZeronDev.LibraryPlugin.init
 import io.github.ZeronDev.LibraryPlugin.plugin
 import org.bukkit.NamespacedKey
 import org.bukkit.event.EventHandler
@@ -13,8 +12,7 @@ import org.bukkit.persistence.PersistentDataType
 
 object ItemListener : Listener {
     fun register() {
-        plugin ?: init()
-        plugin!!.server.pluginManager.registerEvents(this, plugin!!)
+        plugin.server.pluginManager.registerEvents(this, plugin)
     }
     @EventHandler
     fun onInteract(e: PlayerInteractEvent) {
