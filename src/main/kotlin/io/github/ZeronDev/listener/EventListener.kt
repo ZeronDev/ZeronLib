@@ -10,7 +10,7 @@ import org.bukkit.event.Listener
 object EventListener {
     inline fun <reified T : Event> listen(
         eventPriority: EventPriority = EventPriority.NORMAL,
-        crossinline func: (ListenerManager<T>).() -> Unit
+        noinline func: (ListenerManager<T>).() -> Unit
     ) {
 
         when (eventPriority) {

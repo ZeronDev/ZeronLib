@@ -37,4 +37,15 @@ class Region(val pointOne: Location, val pointTwo: Location, val containsAllY: B
             }
         }, plugin)
     }
+
+    fun onLeave(manager: (PlayerMoveEvent) -> Unit) {
+        plugin.server.pluginManager.registerEvents(object : Listener {
+            @EventHandler
+            fun onEnter(e: PlayerMoveEvent) {
+                if (e.hasChangedPosition() && isEntered(e.from) && !isEntered(e.to)) {
+                    manager(e)
+                }
+            }
+        }, plugin)
+    }
 }
