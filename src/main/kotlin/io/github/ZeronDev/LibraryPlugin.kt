@@ -4,7 +4,7 @@ import org.bukkit.Bukkit
 import org.bukkit.plugin.java.JavaPlugin
 import org.bukkit.plugin.java.PluginClassLoader
 
-object LibraryPlugin : JavaPlugin() {
+object LibraryPlugin {
     private val _plugin: JavaPlugin by lazy {
         val loaderField = PluginClassLoader::class.java
             .getDeclaredField("libraryLoader")
