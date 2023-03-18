@@ -1,4 +1,4 @@
-package kommand
+package io.github.ZeronDev.kommand
 
 import io.github.monun.kommand.KommandArgument.Companion.dynamicByMap
 import io.github.monun.kommand.KommandArgument.Companion.string

@@ -25,7 +25,7 @@ class ItemStackBuilder(val material: Material) {
     }
     fun lore(list: MutableList<String>) : ItemStackBuilder {
         item.itemMeta = item.itemMeta.apply {
-            lore(list)
+            this.lore(list.map { text(it) })
         }
         return this
     }
