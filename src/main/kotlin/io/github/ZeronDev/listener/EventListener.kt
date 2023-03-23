@@ -19,7 +19,6 @@ object EventListener {
                 if (listenerManager.isRequired) {
                     func(listenerManager)
                 }
-                func(ListenerManager(event).apply(func))
             }
         }, plugin)
         return listener

@@ -18,3 +18,14 @@ Usage:
 ```kotlin
    api("io.github.ZeronDev:ZeronLib:2.0.2")
 ```
+
+features:
+    - 이벤트 리스닝 (shotokonoko 참고함)
+    - 간편하고 깔끔한 인벤토리 설정 (InvFx 참고함)
+    - Kommand tablist argument
+    - Colorable Text(&a를 §a로 바꿔줌)
+    - 파티클 Shape Drawer (테스트 안됨)
+    - Region 기능 (월드가드의 region)
+    - Scoreboard controller (더 쉽게 스코어보드 만들기)
+    - ConfigHandler (그냥 config 쉽게 다루는 거)
+    - ItemBuilder  (ItemMeta를 한 번에)
