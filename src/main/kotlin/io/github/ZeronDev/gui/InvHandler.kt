@@ -12,11 +12,11 @@ import org.bukkit.inventory.InventoryHolder
 import org.bukkit.inventory.ItemStack
 
 class InvHandler(title: String, lines: Int) : InventoryHolder {
-    internal lateinit var onclick: (InventoryClickEvent) -> Unit
-    internal lateinit var onclose: (InventoryCloseEvent) -> Unit
-    internal lateinit var onopen: (InventoryOpenEvent) -> Unit
-    private lateinit var spaceSetter: ItemStack
-    internal lateinit var slotList: List<Int>
+    internal var onclick: ((InventoryClickEvent) -> Unit)? = null
+    internal var onclose: ((InventoryCloseEvent) -> Unit)? = null
+    internal var onopen: ((InventoryOpenEvent) -> Unit)? = null
+    private  var spaceSetter: ItemStack? = null
+    internal var slotList: List<Int> = listOf()
     internal val slotMap = mutableMapOf<Int, (SlotFunc).()->Unit>()
     private val inv = Bukkit.createInventory(this, lines*9, text(title))
 
@@ -53,7 +53,7 @@ class InvHandler(title: String, lines: Int) : InventoryHolder {
         this.slotList = slotList
     }
     fun build() : Inventory {
-        if (::spaceSetter.isInitialized) {
+        if (spaceSetter != null) {
             slotList.forEach { index ->
                 inv.setItem(index, spaceSetter)
             }

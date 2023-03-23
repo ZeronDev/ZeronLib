@@ -1,6 +1,7 @@
 package io.github.ZeronDev.item
 
 import com.google.gson.Gson
+import io.github.ZeronDev.LibraryPlugin
 import io.github.ZeronDev.LibraryPlugin.plugin
 import org.bukkit.NamespacedKey
 import org.bukkit.event.EventHandler
@@ -16,20 +17,20 @@ object ItemListener : Listener {
     }
     @EventHandler
     fun onInteract(e: PlayerInteractEvent) {
-        if (e.item?.itemMeta?.persistentDataContainer?.has(NamespacedKey.fromString("InteractFun")!!) == true) {
+        if (e.item?.itemMeta?.persistentDataContainer?.has(NamespacedKey(plugin, "InteractFun")) == true) {
             Gson().fromJson(e.item?.itemMeta?.persistentDataContainer?.get(NamespacedKey.fromString("InteractFun")!!
                 , PersistentDataType.STRING), ItemStackBuilder::class.java).interactFunc.invoke(e)
         }
     }
     @EventHandler
     fun onClick(e: InventoryClickEvent) {
-        if (e.currentItem?.itemMeta?.persistentDataContainer?.has(NamespacedKey.fromString("cannotDrag")!!) == true) {
+        if (e.currentItem?.itemMeta?.persistentDataContainer?.has(NamespacedKey(plugin, "cannotDrag")) == true) {
             e.isCancelled
         }
     }
     @EventHandler
     fun onDrag(e: InventoryDragEvent) {
-        if (e.cursor?.itemMeta?.persistentDataContainer?.has(NamespacedKey.fromString("cannotDrag")!!) == true) {
+        if (e.cursor?.itemMeta?.persistentDataContainer?.has(NamespacedKey(plugin, "cannotDrag")) == true) {
             e.isCancelled = true
         }
     }

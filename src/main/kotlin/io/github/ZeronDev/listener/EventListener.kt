@@ -8,60 +8,22 @@ import org.bukkit.event.EventPriority
 import org.bukkit.event.Listener
 
 object EventListener {
-    inline fun <reified T : Event> listen(
-        eventPriority: EventPriority = EventPriority.NORMAL,
-        noinline func: (ListenerManager<T>).() -> Unit
-    ) {
-
-        when (eventPriority) {
-            EventPriority.LOWEST -> {
-                Bukkit.getPluginManager().registerEvents(object : Listener {
-                    @EventHandler(priority = EventPriority.LOWEST)
-                    fun listen(e: T) {
-                        func(ListenerManager(e))
+    object EventListener {
+        inline fun <reified T : Event>listen(
+            eventPriority: EventPriority = EventPriority.NORMAL,
+            noinline func: (ListenerManager<T>).() -> Unit
+        ) : Listener {
+            val listener = object : Listener {}
+            plugin.server.pluginManager.registerEvent(T::class.java, listener, eventPriority, { _, event ->
+                if (event is T) {
+                    val listenerManager = ListenerManager(event).apply(func)
+                    if (listenerManager.isRequired) {
+                        func(listenerManager)
                     }
-                }, plugin)
-            }
-            EventPriority.LOW -> {
-                Bukkit.getPluginManager().registerEvents(object : Listener {
-                    @EventHandler(priority = EventPriority.LOW)
-                    fun listen(e: T) {
-                        func(ListenerManager(e))
-                    }
-                }, plugin)
-            }
-            EventPriority.NORMAL -> {
-                Bukkit.getPluginManager().registerEvents(object : Listener {
-                    @EventHandler(priority = EventPriority.NORMAL)
-                    fun listen(e: T) {
-                        func(ListenerManager(e))
-                    }
-                }, plugin)
-            }
-            EventPriority.HIGH -> {
-                Bukkit.getPluginManager().registerEvents(object : Listener {
-                    @EventHandler(priority = EventPriority.HIGH)
-                    fun listen(e: T) {
-                        func(ListenerManager(e))
-                    }
-                }, plugin)
-            }
-            EventPriority.HIGHEST -> {
-                Bukkit.getPluginManager().registerEvents(object : Listener {
-                    @EventHandler(priority = EventPriority.HIGHEST)
-                    fun listen(e: T) {
-                        func(ListenerManager(e))
-                    }
-                }, plugin)
-            }
-            else -> {
-                Bukkit.getPluginManager().registerEvents(object : Listener {
-                    @EventHandler(priority = EventPriority.MONITOR)
-                    fun listen(e: T) {
-                        func(ListenerManager(e))
-                    }
-                }, plugin)
-            }
+                    func(ListenerManager(event).apply(func))
+                }
+            }, plugin)
+            return listener
         }
     }
 }

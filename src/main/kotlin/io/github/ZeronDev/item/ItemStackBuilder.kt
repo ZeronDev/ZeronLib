@@ -1,6 +1,7 @@
 package io.github.ZeronDev.item
 
 import com.google.gson.Gson
+import io.github.ZeronDev.LibraryPlugin
 import io.github.ZeronDev.item.ItemListener.register
 import net.kyori.adventure.text.Component.text
 import org.bukkit.Material
@@ -50,13 +51,13 @@ class ItemStackBuilder(val material: Material) {
 
     fun cannotDrag() : ItemStackBuilder {
         item.itemMeta = item.itemMeta.apply {
-            persistentDataContainer.set(NamespacedKey.fromString("cannotDrag")!!, PersistentDataType.STRING, "TRUE")
+            persistentDataContainer.set(NamespacedKey(LibraryPlugin.plugin, "cannotDrag"), PersistentDataType.STRING, "TRUE")
         }
         return this
     }
     fun onInteract(func: (PlayerInteractEvent) -> Unit) : ItemStackBuilder {
-        item.itemMeta = item.itemMeta.apply {
-            persistentDataContainer.set(NamespacedKey.fromString("InteractFun")!!, PersistentDataType.STRING, Gson().toJson(this))
+        item.itemMeta = item.itemMeta?.apply {
+            persistentDataContainer.set(NamespacedKey(LibraryPlugin.plugin, "InteractFun"), PersistentDataType.STRING, Gson().toJson(this))
         }
         interactFunc = func
         return this
