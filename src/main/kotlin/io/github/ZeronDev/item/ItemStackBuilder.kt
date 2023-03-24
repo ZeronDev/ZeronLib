@@ -20,7 +20,7 @@ class ItemStackBuilder(val material: Material) {
 
     fun displayName(name: String) : ItemStackBuilder {
         item.itemMeta = item.itemMeta.apply {
-            displayName(text(name))
+            this.displayName(text(name))
         }
         return this
     }
@@ -36,13 +36,13 @@ class ItemStackBuilder(val material: Material) {
     }
     fun modelData(data: Int) : ItemStackBuilder {
         item.itemMeta = item.itemMeta.apply {
-            setCustomModelData(data)
+            this.setCustomModelData(data)
         }
         return this
     }
     fun <T, Z : Any>data(key: NamespacedKey, type: PersistentDataType<T, Z>, value: Z) : ItemStackBuilder {
         item.itemMeta = item.itemMeta.apply {
-            persistentDataContainer.set(key, type, value)
+            this.persistentDataContainer.set(key, type, value)
         }
         return this
     }
@@ -51,13 +51,13 @@ class ItemStackBuilder(val material: Material) {
 
     fun cannotDrag() : ItemStackBuilder {
         item.itemMeta = item.itemMeta.apply {
-            persistentDataContainer.set(NamespacedKey(LibraryPlugin.plugin, "cannotDrag"), PersistentDataType.STRING, "TRUE")
+            this.persistentDataContainer.set(NamespacedKey(LibraryPlugin.plugin, "cannotDrag"), PersistentDataType.STRING, "TRUE")
         }
         return this
     }
     fun onInteract(func: (PlayerInteractEvent) -> Unit) : ItemStackBuilder {
         item.itemMeta = item.itemMeta?.apply {
-            persistentDataContainer.set(NamespacedKey(LibraryPlugin.plugin, "InteractFun"), PersistentDataType.STRING, Gson().toJson(this))
+            this.persistentDataContainer.set(NamespacedKey(LibraryPlugin.plugin, "InteractFun"), PersistentDataType.STRING, Gson().toJson(this))
         }
         interactFunc = func
         return this
