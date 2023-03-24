@@ -10,15 +10,12 @@ import org.bukkit.event.Listener
 object EventListener {
     inline fun <reified T : Event> listen(
         eventPriority: EventPriority = EventPriority.NORMAL,
-        noinline func: (ListenerManager<T>).() -> Unit
+        noinline func: (T) -> Unit
     ): Listener {
         val listener = object : Listener {}
         plugin.server.pluginManager.registerEvent(T::class.java, listener, eventPriority, { _, event ->
             if (event is T) {
-                val listenerManager = ListenerManager(event).apply(func)
-                if (listenerManager.isRequired) {
-                    listenerManager.func()
-                }
+                func.invoke(event)
             }
         }, plugin)
         return listener
