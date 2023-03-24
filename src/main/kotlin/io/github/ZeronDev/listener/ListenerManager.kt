@@ -14,8 +14,6 @@ class ListenerManager<T : Event>(val event: T) {
     }
 
     fun requires(func: (T)->Boolean) {
-        if (!func.invoke(event)) {
-            isRequired = func.invoke(event)
-        }
+        isRequired = func.invoke(event)
     }
 }

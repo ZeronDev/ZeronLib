@@ -17,7 +17,7 @@ object EventListener {
             if (event is T) {
                 val listenerManager = ListenerManager(event).apply(func)
                 if (listenerManager.isRequired) {
-                    func(listenerManager)
+                    listenerManager.func()
                 }
             }
         }, plugin)
