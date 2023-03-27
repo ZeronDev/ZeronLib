@@ -2,6 +2,7 @@ package io.github.ZeronDev.item
 
 import com.google.gson.Gson
 import io.github.ZeronDev.LibraryPlugin.plugin
+import io.github.ZeronDev.config.ConfigHandler.deserializeToObject
 import org.bukkit.NamespacedKey
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
@@ -17,8 +18,8 @@ object ItemListener : Listener {
     @EventHandler
     fun onInteract(e: PlayerInteractEvent) {
         if (e.item?.itemMeta?.persistentDataContainer?.has(NamespacedKey(plugin, "InteractFun")) == true) {
-            Gson().fromJson(e.item?.itemMeta?.persistentDataContainer?.get(NamespacedKey.fromString("InteractFun")!!
-                , PersistentDataType.STRING), ItemStackBuilder::class.java).interactFunc.invoke(e)
+            e.item?.itemMeta?.persistentDataContainer?.get(NamespacedKey(plugin, "InteractFun")
+                , PersistentDataType.BYTE_ARRAY)?.deserializeToObject(ItemStackBuilder::class)?.interactFunc?.invoke(e)
         }
     }
     @EventHandler

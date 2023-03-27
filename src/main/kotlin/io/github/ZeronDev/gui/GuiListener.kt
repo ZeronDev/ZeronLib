@@ -13,21 +13,21 @@ object GuiListener : Listener {
             inv.onopen?.invoke(e)
         }
     }
+
     @EventHandler
     fun onClose(e: InventoryCloseEvent) {
         (e.inventory.holder as? InvHandler)?.let {
             it.onclose?.invoke(e)
         }
     }
+
     @EventHandler
     fun onClick(e: InventoryClickEvent) {
         (e.inventory.holder as? InvHandler)?.let {
-            if (it.slotMap.keys.contains(e.slot)) {
-                it.slotMap[e.slot]!!.invoke(SlotFunc().apply(it.slotMap[e.slot]!!).apply {
-                    event = e
-                })
+            if (it.slotMap.containsKey(e.slot)) {
+                SlotFunc().apply(it.slotMap[e.slot]!!).onslotclick?.invoke(e)
                 return
-            } else if (it.slotList.contains(e.slot)){
+            } else if (it.slotList.contains(e.slot)) {
                 e.isCancelled = true
             }
         }

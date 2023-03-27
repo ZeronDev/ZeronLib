@@ -2,6 +2,7 @@ package io.github.ZeronDev.item
 
 import com.google.gson.Gson
 import io.github.ZeronDev.LibraryPlugin
+import io.github.ZeronDev.config.ConfigHandler.serializeToByteArray
 import io.github.ZeronDev.item.ItemListener.register
 import net.kyori.adventure.text.Component.text
 import org.bukkit.Material
@@ -9,8 +10,9 @@ import org.bukkit.NamespacedKey
 import org.bukkit.event.player.PlayerInteractEvent
 import org.bukkit.inventory.ItemStack
 import org.bukkit.persistence.PersistentDataType
+import java.io.Serializable
 
-class ItemStackBuilder(val material: Material) {
+class ItemStackBuilder(val material: Material) : Serializable {
     init {
         register()
     }
@@ -56,10 +58,10 @@ class ItemStackBuilder(val material: Material) {
         return this
     }
     fun onInteract(func: (PlayerInteractEvent) -> Unit) : ItemStackBuilder {
-        item.itemMeta = item.itemMeta?.apply {
-            this.persistentDataContainer.set(NamespacedKey(LibraryPlugin.plugin, "InteractFun"), PersistentDataType.STRING, Gson().toJson(this))
-        }
         interactFunc = func
+        item.itemMeta = item.itemMeta?.apply {
+            this.persistentDataContainer.set(NamespacedKey(LibraryPlugin.plugin, "InteractFun"), PersistentDataType.BYTE_ARRAY, serializeToByteArray()!!)
+        }
         return this
     }
 }

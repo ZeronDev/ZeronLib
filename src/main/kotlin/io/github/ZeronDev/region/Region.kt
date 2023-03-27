@@ -2,6 +2,8 @@ package io.github.ZeronDev.region
 
 import io.github.ZeronDev.LibraryPlugin.plugin
 import org.bukkit.Location
+import org.bukkit.block.Block
+import org.bukkit.entity.Player
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
 import org.bukkit.event.player.PlayerMoveEvent
@@ -27,6 +29,10 @@ class Region(val pointOne: Location, val pointTwo: Location, val containsAllY: B
         return false
     }
 
+    fun Player.isEntered(region: Region) : Boolean {
+        return isEntered(this.location)
+    }
+
     fun onEnter(manager: (PlayerMoveEvent) -> Unit) {
         plugin.server.pluginManager.registerEvents(object : Listener {
             @EventHandler
@@ -47,5 +53,9 @@ class Region(val pointOne: Location, val pointTwo: Location, val containsAllY: B
                 }
             }
         }, plugin)
+    }
+
+    fun getAllPlayers() : MutableList<Player> {
+        return pointOne.world.players.filter { player -> player.isEntered(this) }.toMutableList()
     }
 }

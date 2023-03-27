@@ -5,5 +5,9 @@ import org.bukkit.inventory.ItemStack
 
 class SlotFunc {
     var item: ItemStack? = null
-    lateinit var event: InventoryClickEvent
+    internal var onslotclick: ((InventoryClickEvent) -> Unit)? = null
+
+    fun onSlotClick(func: (InventoryClickEvent) -> Unit) {
+        onslotclick = func
+    }
 }

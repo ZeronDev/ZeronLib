@@ -1,8 +1,10 @@
 package io.github.ZeronDev.config
 
 import com.google.gson.Gson
+import io.github.ZeronDev.LibraryPlugin.plugin
 import org.bukkit.configuration.file.YamlConfiguration
-import java.io.File
+import java.io.*
+import kotlin.reflect.KClass
 
 object ConfigHandler {
     fun newConfigFile(file: File) : YamlConfiguration? {
@@ -38,10 +40,32 @@ object ConfigHandler {
             e.printStackTrace()
         }
     }
-    fun Any.serializeToString() : String {
-        return Gson().toJson(this)
+    fun Serializable.serializeToByteArray(): ByteArray? {
+        try {
+            val obj = this
+            val bos = ByteArrayOutputStream()
+            val out = ObjectOutputStream(bos)
+            out.writeObject(obj)
+            out.flush()
+            return bos.toByteArray()
+        } catch (e: Exception) {
+            plugin.logger.info("serialize Error")
+            e.printStackTrace()
+        }
+        return null
     }
-    fun <T : Any>String.toObject(type: Class<T>) : T {
-        return Gson().fromJson(this, type)
+
+    inline fun <reified T : Serializable>ByteArray.deserializeToObject(type: KClass<T>): T? {
+        try {
+            val bytes = this
+            val bis = ByteArrayInputStream(bytes)
+            val `in` = ObjectInputStream(bis)
+
+            return `in`.readObject() as? T
+        } catch (e: Exception) {
+            plugin.logger.info("deserialize Error")
+            e.printStackTrace()
+        }
+        return null
     }
 }
