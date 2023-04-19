@@ -17,7 +17,7 @@ class ItemStackBuilder(val material: Material) : Serializable {
         register()
     }
 
-    val item: ItemStack = ItemStack(material)
+    @Transient val item: ItemStack = ItemStack(material)
     lateinit var interactFunc: (PlayerInteractEvent) -> Unit
 
     fun displayName(name: String) : ItemStackBuilder {

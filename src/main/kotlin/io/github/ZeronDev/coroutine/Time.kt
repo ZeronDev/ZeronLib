@@ -1,7 +1,7 @@
 package io.github.ZeronDev.coroutine
 
-class Time {
-    fun ofTicks(time: Int, timeUnit: Unit) : Long = time.toLong() * timeUnit.tick
+object Time {
+    fun ofTicks(time: Int, timeUnit: Unit) : Int = (time * timeUnit.tick).toInt()
     fun ofMilliSeconds(time: Int, timeUnit: Unit) : Long = time.toLong() * timeUnit.ms
 
     enum class Unit(val tick: Long, val ms: Long) {

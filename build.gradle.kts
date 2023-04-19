@@ -16,7 +16,7 @@ ext["signing.password"] = properties["signing.password"]
 ext["signing.secretKeyRingFile"] = properties["signing.secretKeyRingFile"]
 
 group = "io.github.ZeronDev"
-version = "2.2.0"
+version = "2.3.0"
 
 kotlin.jvmToolchain {
     languageVersion.set(JavaLanguageVersion.of(17))
