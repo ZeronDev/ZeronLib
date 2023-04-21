@@ -37,3 +37,5 @@ features:
     - ConfigHandler (그냥 config 쉽게 다루는 거)
 
     - ItemBuilder  (ItemMeta를 한 번에)
+    
+    - ChatChannel 기능 (채널?)
