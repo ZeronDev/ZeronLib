@@ -16,7 +16,7 @@ Latest version : 2.0.2
 
 Usage:
 ```kotlin
-   api("io.github.ZeronDev:ZeronLib:2.0.2")
+   api("io.github.ZeronDev:ZeronLib:2.3.0")
 ```
 
 features:
