@@ -6,6 +6,9 @@ Latest version : 2.3.0
 참고한 라이브러리들 : <a href=https://github.com/lucko/helper>Helper(Lucko님)</a>, <a href=https://github.com/monun/invfx>InvFx(각별님)</a>, <a href=https://github.com/highright1234/shotokonoko>Shotokonoko(하이라이트님)</a>, <a href=https://github.com/devproje/InventoryGUI>InventoryGUI(프로젝트님)</a>
 </h3>
 
+복붙한 부분 : <a href=https://github.com/monun/tap>Tap(각별님)의 GithubSupport부분</a>
+=> GPL-3.0 라이센스를 적용합니다
+
 <h3>
 필요한 라이브러리들 : MCCorutine, Kommand
 </h3>
