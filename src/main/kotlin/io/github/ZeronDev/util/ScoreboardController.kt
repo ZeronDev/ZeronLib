@@ -7,7 +7,7 @@ import org.bukkit.scoreboard.Criteria
 import org.bukkit.scoreboard.DisplaySlot
 import org.bukkit.scoreboard.Scoreboard
 
-class ScoreboardController {
+object ScoreboardController {
     fun newScoreboard(name: String, vararg score: Pair<String, Int>) : Scoreboard {
         val scoreboard = Bukkit.getScoreboardManager().newScoreboard
         val objective = scoreboard.registerNewObjective("scoreboard_${name}", Criteria.DUMMY, Component.text(name))
