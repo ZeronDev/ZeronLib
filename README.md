@@ -1,10 +1,13 @@
 # ZeronLib
 
-Latest version : 2.0.2
+Latest version : 2.3.0
 
 <h3>
 참고한 라이브러리들 : <a href=https://github.com/lucko/helper>Helper(Lucko님)</a>, <a href=https://github.com/monun/invfx>InvFx(각별님)</a>, <a href=https://github.com/highright1234/shotokonoko>Shotokonoko(하이라이트님)</a>, <a href=https://github.com/devproje/InventoryGUI>InventoryGUI(프로젝트님)</a>
 </h3>
+
+<h1>복붙한 부분 : <a href=https://github.com/monun/tap>Tap(각별님)의 GithubSupport부분</a>
+=> GPL-3.0 라이센스를 적용합니다</h1>
 
 <h3>
 필요한 라이브러리들 : MCCorutine, Kommand
@@ -16,10 +19,11 @@ Latest version : 2.0.2
 
 Usage:
 ```kotlin
-   api("io.github.ZeronDev:ZeronLib:2.0.2")
+   api("io.github.ZeronDev:ZeronLib:2.3.0")
 ```
 
 features:
+
     - 이벤트 리스닝 (shotokonoko 참고함)
 
     - 간편하고 깔끔한 인벤토리 설정 (InvFx 참고함)
@@ -37,3 +41,5 @@ features:
     - ConfigHandler (그냥 config 쉽게 다루는 거)
 
     - ItemBuilder  (ItemMeta를 한 번에)
+    
+    - ChatChannel 기능 (채널?)
