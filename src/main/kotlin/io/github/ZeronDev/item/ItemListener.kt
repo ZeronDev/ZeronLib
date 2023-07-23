@@ -2,7 +2,7 @@ package io.github.ZeronDev.item
 
 import com.google.gson.Gson
 import io.github.ZeronDev.LibraryPlugin.plugin
-import io.github.ZeronDev.config.ConfigHandler.deserializeToObject
+import io.github.ZeronDev.config.ConfigHandler.Companion.deserializeToObject
 import org.bukkit.NamespacedKey
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener

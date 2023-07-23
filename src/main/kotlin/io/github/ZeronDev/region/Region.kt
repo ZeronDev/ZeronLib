@@ -3,13 +3,13 @@ package io.github.ZeronDev.region
 import io.github.ZeronDev.LibraryPlugin.plugin
 import io.papermc.paper.event.entity.EntityMoveEvent
 import org.bukkit.Location
-import org.bukkit.block.Block
 import org.bukkit.entity.Entity
-import org.bukkit.entity.LivingEntity
 import org.bukkit.entity.Player
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
+import org.bukkit.event.entity.EntityTeleportEvent
 import org.bukkit.event.player.PlayerMoveEvent
+import org.bukkit.event.player.PlayerTeleportEvent
 
 class Region(val pointOne: Location, val pointTwo: Location, val containsAllY: Boolean = false) {
     constructor(center: Location, radius: Int, containsAllY: Boolean = false) : this(
@@ -51,13 +51,33 @@ class Region(val pointOne: Location, val pointTwo: Location, val containsAllY: B
                 }
             }
         }, plugin)
+        plugin.server.pluginManager.registerEvents(object : Listener {
+            @EventHandler
+            fun onEnter(e: PlayerTeleportEvent) {
+                if (e.hasChangedPosition() && isEntered(e.to) && !isEntered(e.from)) {
+                    manager(e)
+                }
+            }
+        }, plugin)
         return this
     }
-    fun onEnterEntity(manager: (EntityMoveEvent) -> Unit) : Region {
+    fun onEnterEntity(manager: (EntityMoveEvent) -> Unit, teleportManager: ((EntityTeleportEvent) -> Unit)? = null) : Region {
         plugin.server.pluginManager.registerEvents(object : Listener {
             @EventHandler
             fun onEnter(e: EntityMoveEvent) {
                 if (e.hasChangedPosition() && isEntered(e.to) && !isEntered(e.from)) {
+                    manager(e)
+                }
+            }
+        }, plugin)
+        return this
+    }
+
+    fun onEnterEntityTeleport(manager: (EntityTeleportEvent) -> Unit) : Region {
+        plugin.server.pluginManager.registerEvents(object : Listener {
+            @EventHandler
+            fun onEnter(e: EntityTeleportEvent) {
+                if (e.to != e.from && isEntered(e.to!!) && !isEntered(e.from)) {
                     manager(e)
                 }
             }
@@ -74,6 +94,14 @@ class Region(val pointOne: Location, val pointTwo: Location, val containsAllY: B
                 }
             }
         }, plugin)
+        plugin.server.pluginManager.registerEvents(object : Listener {
+            @EventHandler
+            fun onLeave(e: PlayerTeleportEvent) {
+                if (e.hasChangedPosition() && isEntered(e.from) && !isEntered(e.to)) {
+                    manager(e)
+                }
+            }
+        }, plugin)
         return this
     }
     fun onEntityLeave(manager: (EntityMoveEvent) -> Unit) : Region {
@@ -81,6 +109,18 @@ class Region(val pointOne: Location, val pointTwo: Location, val containsAllY: B
             @EventHandler
             fun onLeave(e: EntityMoveEvent) {
                 if (e.hasChangedPosition() && isEntered(e.from) && !isEntered(e.to)) {
+                    manager(e)
+                }
+            }
+        }, plugin)
+        return this
+    }
+
+    fun onEntityLeaveTeleport(manager: (EntityTeleportEvent) -> Unit) : Region {
+        plugin.server.pluginManager.registerEvents(object : Listener {
+            @EventHandler
+            fun onLeave(e: EntityTeleportEvent) {
+                if (e.to != e.from && isEntered(e.from) && !isEntered(e.to!!)) {
                     manager(e)
                 }
             }

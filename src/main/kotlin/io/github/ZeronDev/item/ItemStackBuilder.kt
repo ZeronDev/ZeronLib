@@ -2,7 +2,7 @@ package io.github.ZeronDev.item
 
 import com.google.gson.Gson
 import io.github.ZeronDev.LibraryPlugin
-import io.github.ZeronDev.config.ConfigHandler.serializeToByteArray
+import io.github.ZeronDev.config.ConfigHandler.Companion.serializeToByteArray
 import io.github.ZeronDev.item.ItemListener.register
 import net.kyori.adventure.text.Component.text
 import org.bukkit.Material
