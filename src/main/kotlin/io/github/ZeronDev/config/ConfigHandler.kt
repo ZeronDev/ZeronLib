@@ -1,6 +1,5 @@
 package io.github.ZeronDev.config
 
-import com.google.gson.Gson
 import io.github.ZeronDev.LibraryPlugin.plugin
 import org.bukkit.configuration.file.FileConfiguration
 import org.bukkit.configuration.file.YamlConfiguration
@@ -46,6 +45,14 @@ class ConfigHandler(val file: File) {
                 e.printStackTrace()
             }
         }
+        fun readConfigFile(file: File) : YamlConfiguration? {
+            try {
+                return YamlConfiguration.loadConfiguration(file)
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
+            return null
+        }
     }
     fun newConfigFile() : YamlConfiguration? {
         try {
@@ -64,7 +71,6 @@ class ConfigHandler(val file: File) {
 
     fun saveConfigFile() {
         try {
-            plugin.logger.info(config.toString())
             config.save(file)
         } catch (e: Exception) {
             e.printStackTrace()

@@ -16,7 +16,7 @@ ext["signing.password"] = properties["signing.password"]
 ext["signing.secretKeyRingFile"] = properties["signing.secretKeyRingFile"]
 
 group = "io.github.ZeronDev"
-version = "2.6.0"
+version = "2.7.0"
 
 kotlin.jvmToolchain {
     languageVersion.set(JavaLanguageVersion.of(17))
@@ -37,6 +37,9 @@ dependencies {
     compileOnly("io.papermc.paper:paper-api:1.19.2-R0.1-SNAPSHOT")
     compileOnly("io.papermc.paper:paper-api:1.19.3-R0.1-SNAPSHOT")
     compileOnly("io.papermc.paper:paper-api:1.19.4-R0.1-SNAPSHOT")
+    compileOnly("io.papermc.paper:paper-api:1.20-R0.1-SNAPSHOT")
+    compileOnly("io.papermc.paper:paper-api:1.20.1-R0.1-SNAPSHOT")
+
     implementation("io.github.monun:kommand-api:3.1.2")
     implementation("com.github.shynixn.mccoroutine:mccoroutine-bukkit-api:2.11.0")
     implementation("com.github.shynixn.mccoroutine:mccoroutine-bukkit-core:2.11.0")

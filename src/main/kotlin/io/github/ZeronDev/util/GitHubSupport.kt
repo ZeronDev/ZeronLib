@@ -11,7 +11,8 @@ import java.net.HttpURLConnection
 import java.net.URL
 import java.util.concurrent.CompletableFuture
 
-    object GitHubSupport {
+// 각별님의 tap
+object GitHubSupport {
     private const val GITHUB_API = "https://api.github.com"
 
     private const val KEY_ASSETS = "assets"

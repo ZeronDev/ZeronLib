@@ -2,6 +2,7 @@ package io.github.ZeronDev.util
 
 import kotlin.math.max
 
+// 각별님의 tap
 enum class MavenVersionIdentifier(val priority: Int) {
     NONE(10),
     RELEASE(9),
@@ -14,7 +15,7 @@ enum class MavenVersionIdentifier(val priority: Int) {
     ALPHA(2),
     DEV(1)
 }
-
+// 각별님의 tap
 private val String.identifier: MavenVersionIdentifier
     get() {
         return if (equals("0")) {
@@ -27,7 +28,7 @@ private val String.identifier: MavenVersionIdentifier
             }
         }
     }
-
+// 각별님의 tap
 private val String.isValidLong: Boolean
     get() {
         return try {
@@ -37,7 +38,7 @@ private val String.isValidLong: Boolean
             false
         }
     }
-
+// 각별님의 tap
 infix fun String.compareVersion(other: String): Int {
     if (!matches("""^\d+(\.\d+)*(-[a-zA-Z]*)?$""".toRegex()) || !other.matches("""^\d+(\.\d+)*(-[a-zA-Z]*)?$""".toRegex())) {
         throw RuntimeException("The version format does not valid.")
@@ -65,7 +66,7 @@ infix fun String.compareVersion(other: String): Int {
 
     return 0
 }
-
+// 각별님의 tap
 object AlphanumComparator : Comparator<String?> {
     private fun isDigit(ch: Char): Boolean {
         return ch.code in 48..57
